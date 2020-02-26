@@ -1,10 +1,17 @@
 #install required libraries
 #pip3 install matplotlib
-
+#pip3 install Tkinter
 import matplotlib
 from matplotlib import pyplot as plt
+import tkinter as tk
+import tkinter.filedialog 
+from tkinter.filedialog import askopenfilename
 
-with open(63f8c42f.tumor.prefix_dis) as f: #opens output file from msisensor2
+
+filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
+print(filename)
+
+with open(filename) as f:
     read_data = f.readlines() # reads each line in file
     #print(read_data)
     for line in read_data:
