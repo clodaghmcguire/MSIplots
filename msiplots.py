@@ -6,18 +6,21 @@ from matplotlib import pyplot as plt
 import tkinter as tk
 import tkinter.filedialog 
 from tkinter.filedialog import askopenfilename
+import os
 
-
-filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
-print(filename)
+filelocation = askopenfilename() # show an "Open" dialog box and return the path to the selected file
+print(filelocation)
+filename = os.path.split(filelocation)[1]
 print("where do you want to save your graphs?")
 directory = tkinter.filedialog.askdirectory()
+print(directory)
+coverage = int(input("what coverage?"))
 
 fig = plt.figure(figsize=(50, 30))
 fig.subplots_adjust(hspace = 1, wspace = 1)
 position = 1
 
-with open(filename) as f:
+with open(filelocation) as f:
     read_data = f.readlines() # reads each line in file
     for line in read_data:
         c = line.startswith("chr")
@@ -30,8 +33,9 @@ with open(filename) as f:
             data = data.split()
             data = [int(i) for i in data] # turn list of strings into list of integers
             total = sum(data)
-            print("plotting read count distribution")
-            if total>20: #only selects those sites where coverage >20 as these are the only ones used to generated the MSI score
+            
+            if total>coverage: #only selects those sites where coverage is high enough be to used to generate MSI score
+                print("plotting read count distribution")
                 ax = plt.subplot(10,10,position)
                 ax.plot(data) # plots list of numbers (ie read count distribution) as a line graph
                 plt.xlabel("Repeat length")
@@ -39,7 +43,7 @@ with open(filename) as f:
                 plt.title(graph_title)
                 position= position + 1
 
-plt.savefig(directory+"/"+"graph.png")
+plt.savefig(directory+"/"+filename+".png")
 print("file saved to", directory)
 
 
