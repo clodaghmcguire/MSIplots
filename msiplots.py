@@ -26,7 +26,7 @@ with open(filename) as f:
             data = [int(i) for i in data] # turn list of strings into list of integers
             total = sum(data)
             print("plotting read count distribution")
-            if total>0: 
+            if total>20: #only selects those sites where coverage >20 as these are the only ones used to generated the MSI score
                 plt.plot(data) # plots list of numbers (ie read count distribution) as a line graph
                 plt.xlabel("Repeat length")
                 plt.ylabel("Frequency")
