@@ -13,7 +13,8 @@ print(filename)
 print("where do you want to save your graphs?")
 directory = tkinter.filedialog.askdirectory()
 
-fig = plt.figure()
+fig = plt.figure(figsize=(50, 30))
+fig.subplots_adjust(hspace = 1, wspace = 1)
 position = 1
 
 with open(filename) as f:
@@ -39,7 +40,8 @@ with open(filename) as f:
                 position= position + 1
 
 plt.savefig(directory+"/"+"graph.png")
-                #plt.clf() #clears plot from axis so that it's blank for the next plot
+print("file saved to", directory)
+
 
                 
 
