@@ -12,6 +12,10 @@ filename = askopenfilename() # show an "Open" dialog box and return the path to 
 print(filename)
 print("where do you want to save your graphs?")
 directory = tkinter.filedialog.askdirectory()
+
+fig = plt.figure()
+position = 1
+
 with open(filename) as f:
     read_data = f.readlines() # reads each line in file
     for line in read_data:
@@ -27,12 +31,15 @@ with open(filename) as f:
             total = sum(data)
             print("plotting read count distribution")
             if total>20: #only selects those sites where coverage >20 as these are the only ones used to generated the MSI score
-                plt.plot(data) # plots list of numbers (ie read count distribution) as a line graph
+                ax = plt.subplot(10,10,position)
+                ax.plot(data) # plots list of numbers (ie read count distribution) as a line graph
                 plt.xlabel("Repeat length")
                 plt.ylabel("Frequency")
                 plt.title(graph_title)
-                plt.savefig(directory+"/"+graph_title+".png")
-                plt.clf() #clears plot from axis so that it's blank for the next plot
+                position= position + 1
+
+plt.savefig(directory+"/"+"graph.png")
+                #plt.clf() #clears plot from axis so that it's blank for the next plot
 
                 
 
