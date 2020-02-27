@@ -1,3 +1,12 @@
+"""
+This program takes the read count distribution output file from msisensor2 (output.prefix_dis) 
+and plots the distribution for all microsatellite and homopolymer sites that meet the required
+coverage. The chosed coverage should match what was entered into msisensor2 (default is 20)
+
+msisensor2 is available at https://github.com/niu-lab/msisensor2
+"""
+
+
 #install required libraries
 #pip3 install matplotlib
 #pip3 install Tkinter
