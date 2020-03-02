@@ -16,6 +16,7 @@ import tkinter as tk
 import tkinter.filedialog 
 from tkinter.filedialog import askopenfilename
 import os
+import numpy as np
 
 filelocation = askopenfilename() # show an "Open" dialog box and return the path to the selected file
 print(filelocation)
@@ -45,8 +46,9 @@ with open(filelocation) as f:
             
             if total>coverage: #only selects those sites where coverage is high enough be to used to generate MSI score
                 print("plotting read count distribution")
-                ax = plt.subplot(10,10,position)
-                ax.plot(data) # plots list of numbers (ie read count distribution) as a line graph
+                ax = plt.subplot(8,4,position)
+                ax.bar(np.arange(len(data)), data) # plots list of numbers (ie read count distribution) as a bar graph
+                plt.xlim(right=40) #limits x-axis to 40 so that you can see spread of distribution clearly
                 plt.xlabel("Repeat length")
                 plt.ylabel("Frequency")
                 plt.title(graph_title)
